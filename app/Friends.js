@@ -1,6 +1,5 @@
 FbApp.Friends = Backbone.Collection.extend({
   model: FbApp.Friend,
-
   search: function(searchToken){
     searchToken = searchToken.toLowerCase();
 
@@ -27,5 +26,5 @@ FbApp.Friends = Backbone.Collection.extend({
     });
 
     this.trigger('reset', sortedArray);
-  }
+  },
 });
