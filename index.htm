@@ -120,10 +120,16 @@
     <script type="text/javascript">
       FbApp.init = function(){
         var myFriends = new FbApp.Friends();
+        var myCharts = new FbApp.ChartsView({
+              collection:myFriends,
+          });
         var myApp = new FbApp.AppView({
           collection : myFriends,
           el: $('.app')[0],
         });
+
+        console.log(myCharts);
+        console.log(myApp);
         myFriends.reset(getFriends());
       };
       FbApp.init();

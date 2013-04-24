@@ -1,7 +1,10 @@
 FbApp.ChartsView = Backbone.View.extend({
-  className:" charts",
+	events:{
+
+  },
 
   initialize: function(){
+ 
   },
 
   setChartBySex: function(arrayForChartBySex){
@@ -34,6 +37,13 @@ FbApp.ChartsView = Backbone.View.extend({
   		arrayByFriendCount.forEach(function(tab){
   			tab[0] = "< " + tab[0];
   		});
+  },
+
+  render: function(collection){
+    collection.forEach(function(friend){
+
+    }, this);
+
   },
 });
 
