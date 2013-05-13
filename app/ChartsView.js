@@ -7,11 +7,11 @@ FbApp.ChartsView = Backbone.View.extend({
  
   },
 
-  setChartBySex: function(arrayForChartBySex){
+  setChartBySex: function(arrayForChartBySex){   //On va afficher le graphique en fonction du Json passé en paramètre
 	 var plot1 = jQuery.jqplot ('chartBySex', [arrayForChartBySex], { 
         seriesDefaults: {
-          title:'Pourcentage par sexe',
-          renderer: jQuery.jqplot.PieRenderer, 
+          title:'Pourcentage par sexe',  //Le titre du graphe
+          renderer: jQuery.jqplot.PieRenderer,  //Le type de graphe
           rendererOptions: {
             showDataLabels: true
           }

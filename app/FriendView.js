@@ -6,7 +6,7 @@ FbApp.FriendView = Backbone.View.extend({
   },
 
   render: function(){
-    this.$el.html(this.tmpl(this.model.toJSON()));
+    this.$el.html(this.tmpl(this.model.toJSON()));  // On va chercher dans le fichier HTML le template qu'on veut pour chaque item de la collection
     return this;
   }
 });
