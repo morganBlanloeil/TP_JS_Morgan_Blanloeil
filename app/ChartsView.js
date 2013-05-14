@@ -33,6 +33,18 @@ FbApp.ChartsView = Backbone.View.extend({
 	 });
   },
 
+  setChartByRelationShip : function(arrayByRelationChip){
+      var plot3 = jQuery.jqplot ('chartByRelationShip', [arrayByRelationChip], { 
+        seriesDefaults: {
+          renderer: jQuery.jqplot.PieRenderer, 
+          rendererOptions: {
+            showDataLabels: true
+          }
+        }, 
+        legend: { show:true, location: 'e' }
+   });
+  },
+
   resetTitleTabFriendCount : function(arrayByFriendCount){
   		arrayByFriendCount.forEach(function(tab){
   			tab[0] = "< " + tab[0];

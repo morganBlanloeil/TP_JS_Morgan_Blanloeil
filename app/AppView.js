@@ -27,6 +27,7 @@ FbApp.AppView = Backbone.View.extend({
     var arrayForChartBySex = new Array();  // Tableau pour le graphe
     var tabIndexFriendCount = [100,200,300,400,500];
     var arrayForChartByFriendCount = new Array();
+    var arrayForChartByRelationShip = new Array();
     this.initializeTab(arrayForChartByFriendCount,tabIndexFriendCount);
     var $container = $('<div/>');
     collection.forEach(function(friend){  //Pour chaque item de la collection
@@ -36,12 +37,15 @@ FbApp.AppView = Backbone.View.extend({
       $container.append(view.render().$el);  // On ajoute la vue renvoyé par le model a notre contenair principal
       this.putInArrayForChart(arrayForChartBySex,friend['attributes']['sex']);  //On incrémente nos tableaux pour nos graphiques
       this.putInArrayForChartFriendCount(arrayForChartByFriendCount,friend['attributes']['friend_count']);
+      this.putInArrayForChart(arrayForChartByRelationShip,friend['attributes']['relationship_status']);
+      
     }, this);
     this.$friendList.append($container);  //On affiche le contenaire
 
     var chartView = new FbApp.ChartsView();  //On créer une vue pour les graphes
     chartView.setChartBySex(arrayForChartBySex); //On affiche les graphes
     chartView.setChartByFriendCount(arrayForChartByFriendCount);
+    chartView.setChartByRelationShip(arrayForChartByRelationShip);
   },
 
   putInArrayForChart: function(tab,type){     

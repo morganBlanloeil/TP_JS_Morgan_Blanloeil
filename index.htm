@@ -63,15 +63,17 @@
             <button class="btn" id="byName">Sort by name</button>
             <button class="btn" id="byBirthday">Sort by birthday</button>
           </div>
-          <div class = "charts span12"> 
-                  <div class="span4">
-                    <h5>Pourcentage par Sex</h5> <div style="width:100%; height : 200px" id ="chartBySex"></div>
-                  </div> 
-
-                  <div class="span4">
-                    <h5>Pourcentage par nombre d'amis</h5> <div style="width:100%; height : 200px" id ="chartByFriendCount"></div>
-                  </div>   
-       
+          <div style="margin-left : -50px;" class = "charts"> 
+                <ul class="nav nav-tabs">
+                   <li id="li_amis"class="active">
+                      <a href="#" onclick="FbApp.showCharts('chartByFriendCount','li_amis'); return false;">Nombre d'amis</a>
+                  </li>
+                  <li id="li_sex"><a href="#"  onclick=" FbApp.showCharts('chartBySex','li_sex'); return false;">Sexe</a></li>
+                  <li id="li_status"><a href="#"  onclick="FbApp.showCharts('chartByRelationShip' , 'li_status'); return false;">Status</a></li>
+                </ul>
+                  <div style="width:100%; height : 300px" id ="chartBySex"></div>          <!--  Les différentes div sont destinées à l'affichages des 3 graphiques  -->  
+                  <div style="width:100%; height : 300px" id ="chartByFriendCount"></div>
+                  <div style="width:100%; height : 300px" id ="chartByRelationShip"></div>     
           </div>
           <div class="friend-list row"></div>
         </div>
@@ -88,7 +90,6 @@
         <div class="media-body">
           <h4 class="media-heading"><a href="<%= profile_url %>"><%= sort_first_name %> <%= sort_last_name %></a></h4>
           <small><%= birthday_date %></small>
-          <small><%= activities %></small>
           <small><%= relationship_status %></small><br/>
           <small><%= hometown_location ? hometown_location.name : '' %></small><br/>
         </div>
@@ -96,7 +97,6 @@
     </script>
     <script src="js/getFriends.js"></script>
     <script src="js/jquery-1.9.0.js"></script>
-    <script src="js/jquery.jqplot.min.js"></script>
     <script src="js/jquery.jqplot.js"></script>
     <script src="js/bootstrap.2.2.2.js"></script>
     <script src="js/underscore.1.4.4.js"></script>
@@ -129,6 +129,33 @@
         myFriends.reset(getFriends());
       };
       FbApp.init();
+    </script>
+    <script type="text/javascript">
+      $('#chartBySex').hide();
+      $('#chartByRelationShip').hide();
+      FbApp.ChartsShow = '#chartByFriendCount';
+      FbApp.LiActive = '#li_amis';
+
+      FbApp.showCharts = function(chart,id_li){
+        console.log(chart);
+          var tmpDiv = "#" + chart;
+          var tmpLi =  "#" + id_li;
+          console.log(tmpDiv);
+          if ($(FbApp.ChartsShow).is(':visible')) {
+                  $(FbApp.ChartsShow).hide('slow',function(){});
+          }
+          if (! $(tmpDiv).is(':visible')) {
+                  $(tmpDiv).show('slow', function() {});
+          }
+          $(FbApp.LiActive).removeClass("active"); //On supprime la classe active de l'onglet 
+
+          FbApp.LiActive = tmpLi;  //On change la div qui sera active
+
+          $(FbApp.LiActive).addClass("active");  //On donne la classe active pour montrer quel onglet est actif
+
+          FbApp.ChartsShow = tmpDiv;
+        
+      };
     </script>
   </body>
 </html>
