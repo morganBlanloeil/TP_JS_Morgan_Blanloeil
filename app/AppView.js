@@ -54,7 +54,7 @@ FbApp.AppView = Backbone.View.extend({
         }
       });
       if(tmp == false){  //Sinon on en créer une nouvelle
-           var newTab = new Array(type,0);
+           var newTab = new Array(type,1);
            tab.push(newTab);
       }
   },
