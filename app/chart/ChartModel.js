@@ -1,23 +1,19 @@
 FbApp.ChartModel = Backbone.Model.extend({
-
-	//defaults 
+	
+	defaults: {
+	    
+  	},
 
 	initialize : function(options){
-		// _.extend(this,options || {});
-		// this.collection.on('reset', this.processData , this);
+		 _.extend(this,options || {});
+		 this.collection.on('reset', this.processData , this);
+		 this.arr = [];
 	},
 
 
- 	setCollection : function(collection){
-		
-	},
-
-	processData : function(){
-		this.set('charData' ,arr);
+	processData : function(collection){
 		throw new Error(".processData NOT IMPLEMENTED");
 	}
 
 
 });
-
-// this.model.on('change : changeData' , this.render,this);

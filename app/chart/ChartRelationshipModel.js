@@ -1,11 +1,15 @@
 FbApp.ChartRelationshipModel = FbApp.ChartModel.extend({
 
-	setCollection : function(collection){
-		var arrayForChartBySex = []; 
+	/*initialize: function(){
+        this.collection.on('reset', this.render, this);    
+  	},*/
+
+	processData : function(collection){
+		var arrayByRelationChip = []; 
 		collection.forEach(function(friend){
 			var type = friend['attributes']['relationship_status'];
 			 var tmp =  false;
-		      arrayForChartBySex.forEach(function(tabEnter){  //On parcours le tableau si la colonne éxiste déja on l'incrémente
+		      arrayByRelationChip.forEach(function(tabEnter){  //On parcours le tableau si la colonne éxiste déja on l'incrémente
 		        if(tabEnter[0] == type){
 		            tabEnter[1]++;
 		            tmp = true
@@ -14,11 +18,11 @@ FbApp.ChartRelationshipModel = FbApp.ChartModel.extend({
 		      });
 		      if(tmp == false){  //Sinon on en créer une nouvelle
 		           var newTab = new Array(type,1);
-		           arrayForChartBySex.push(newTab);
+		           arrayByRelationChip.push(newTab);
 		      }
 		});
-		this.setChartByRelationShip(arrayForChartBySex);
-		console.log(arrayForChartBySex);
+		this.arr = arrayByRelationChip;
+		this.set('charData' ,this.arr);
 	},
 
 	 setChartByRelationShip : function(arrayByRelationChip){

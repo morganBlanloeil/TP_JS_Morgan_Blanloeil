@@ -1,6 +1,6 @@
 FbApp.ChartSexModel = FbApp.ChartModel.extend({
 
- 	setCollection : function(collection){
+ 	processData : function(collection){
 		var arrayForChartBySex = []; 
 		collection.forEach(function(friend){
 			var type = friend['attributes']['sex'];
@@ -17,10 +17,11 @@ FbApp.ChartSexModel = FbApp.ChartModel.extend({
 		           arrayForChartBySex.push(newTab);
 		      }
 		});
-		this.setChartBySex(arrayForChartBySex);
+		this.arr = arrayForChartBySex;
+		this.set('charData' ,this.arr);
 	},
 
-	setChartBySex: function(arrayForChartBySex){   //On va afficher le graphique en fonction du Json passé en paramètre
+	/*setChartBySex: function(arrayForChartBySex){   //On va afficher le graphique en fonction du Json passé en paramètre
 	 var plot1 = jQuery.jqplot ('chartBySex', [arrayForChartBySex], { 
         seriesDefaults: {
           title:'Pourcentage par sexe',  //Le titre du graphe
@@ -31,10 +32,5 @@ FbApp.ChartSexModel = FbApp.ChartModel.extend({
         }, 
         legend: { show:true, location: 'e' }
 	 });
-  },
-
-
-
-  	
-
+  },*/
 });

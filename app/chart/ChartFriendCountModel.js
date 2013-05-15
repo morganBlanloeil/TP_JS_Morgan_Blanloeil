@@ -1,7 +1,10 @@
 FbApp.ChartFriendCountModel = FbApp.ChartModel.extend({
 	
+	/*initialize: function(){
+        this.collection.on('reset', this.render, this);    
+  	},*/
 
-	setCollection : function(collection){
+	processData : function(collection){
 		var tabIndexFriendCount = [100,200,300,400,500];
 	    var arrayForChartByFriendCount =  [];
 	    tabIndexFriendCount.forEach(function(item){
@@ -19,7 +22,8 @@ FbApp.ChartFriendCountModel = FbApp.ChartModel.extend({
 	          	tmpMin = tabEnter[0];
       	 	});
 		});
-		this.setChartByFriendCount(arrayForChartByFriendCount);
+		this.arr = arrayForChartByFriendCount;
+		/*this.set('charData' ,this.arr);*/
 	},
 
 	setChartByFriendCount: function(arrayByFriendCount){
@@ -32,7 +36,13 @@ FbApp.ChartFriendCountModel = FbApp.ChartModel.extend({
         }, 
         legend: { show:true, location: 'e' }
 	 });
-  },  	
+  },  
+
+  resetTitleTabFriendCount : function(arrayByFriendCount){
+  		arrayByFriendCount.forEach(function(tab){
+  			tab[0] = "< " + tab[0];
+  		});
+  },	
 
 
 });
