@@ -1,9 +1,9 @@
 FbApp.ChartFriendCountModel = FbApp.ChartModel.extend({
 	
 	processData : function(collection){
-		var tabIndexFriendCount = [100,200,300,400,500];
+		var tabIndexFriendCount = [100,200,300,400,500];  //Les différents intervalles des ages
 	    var arrayForChartByFriendCount =  [];
-	    tabIndexFriendCount.forEach(function(item){
+	    tabIndexFriendCount.forEach(function(item){  //On rempli le tableau avec les intervalles
 	      var tmp = [item,0];
           arrayForChartByFriendCount.push(tmp);  
         });   
@@ -19,7 +19,7 @@ FbApp.ChartFriendCountModel = FbApp.ChartModel.extend({
       	 	});
 		});
 
-		arrayForChartByFriendCount.forEach(function(tab){
+		arrayForChartByFriendCount.forEach(function(tab){  //On formate les titres
   			tab[0] = "< " + tab[0];
   		});  
 

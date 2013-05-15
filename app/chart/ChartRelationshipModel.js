@@ -3,7 +3,7 @@ FbApp.ChartRelationshipModel = FbApp.ChartModel.extend({
 	processData : function(collection){
 		var arrayByRelationChip = []; 
 		collection.forEach(function(friend){
-			var type = friend['attributes']['relationship_status'];
+			var type = friend['attributes']['relationship_status']; //On récupère l'information
 			 var tmp =  false;
 		      arrayByRelationChip.forEach(function(tabEnter){  //On parcours le tableau si la colonne éxiste déja on l'incrémente
 		        if(tabEnter[0] == type){
