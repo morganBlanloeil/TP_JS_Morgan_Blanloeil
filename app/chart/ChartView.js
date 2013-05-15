@@ -14,7 +14,40 @@ FbApp.ChartView = Backbone.View.extend({
     jqPlot se charge de l'affichage
   */
   render : function(tab){
-    	var plot2 = jQuery.jqplot (this.nameDiv, [tab.arr], { 
+    console.log(tab.arr);
+    $(this.el).highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: this.title,
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+              percentageDecimals: 0,
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                data : tab.arr,
+            }]
+        });
+    	/*var plot2 = jQuery.jqplot (this.nameDiv, [tab.arr], { 
         seriesDefaults: {
           renderer: jQuery.jqplot.PieRenderer, 
           rendererOptions: {
@@ -22,7 +55,8 @@ FbApp.ChartView = Backbone.View.extend({
           }
         }, 
         legend: { show:true, location: 'e' }
-	 });
-  }
+	 });*/
+  
+  },
 });
 

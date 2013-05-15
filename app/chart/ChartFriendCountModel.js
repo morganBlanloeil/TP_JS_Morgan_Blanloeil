@@ -18,11 +18,11 @@ FbApp.ChartFriendCountModel = FbApp.ChartModel.extend({
 	          	tmpMin = tabEnter[0];
       	 	});
 		});
-
-		arrayForChartByFriendCount.forEach(function(tab){  //On formate les titres
-  			tab[0] = "< " + tab[0];
-  		});  
-
+		arrayForChartByFriendCount[0][0] = "100";
+		arrayForChartByFriendCount[1][0] = "200";
+		arrayForChartByFriendCount[2][0] = "300";
+		arrayForChartByFriendCount[3][0] = "400";
+		arrayForChartByFriendCount[4][0] = "500";
 		this.arr = arrayForChartByFriendCount
 		this.trigger('charData' ,this);
 	},

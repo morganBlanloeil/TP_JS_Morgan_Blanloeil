@@ -110,6 +110,8 @@
     <script src="js/backbone.1.0.0.js"></script>
     <script src="js/jqplot.donutRenderer.js"></script>
     <script src="js/jqplot.pieRenderer.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
     
     <script type="text/javascript">
       var FbApp = {};
@@ -153,20 +155,24 @@
 
         var myChartSexView = new FbApp.ChartSexView({
           model : myChartSexModel,
-          nameDiv: 'chartBySex',
+          el: '#chartBySex',
+          title : "Sexe",
         });
         var myChartFriendCountView = new FbApp.ChartFriendCountView({
           model : myChartFriendCountModel,
-          nameDiv: 'chartByFriendCount',
+          el: '#chartByFriendCount',
+          title : "Friend Count",
         });
         var myChartRelationshipView = new FbApp.ChartRelationshipView({
           model : myChartRelationshipModel,
-          nameDiv: 'chartByRelationShip',
+          el: '#chartByRelationShip',
+          title : "Relationship",
         });
 
         var myChartAgeView = new FbApp.ChartAgeView({
           model : myChartAgeModel,
-          nameDiv: 'chartByAge',
+          el : '#chartByAge',
+          title : "Age",
         });
 
         var myApp = new FbApp.AppView({
