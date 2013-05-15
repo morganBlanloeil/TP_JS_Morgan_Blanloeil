@@ -57,23 +57,30 @@
       <div class="app row">
         <div class="span12">
           <h2 class="app-heading">Fb Friends App</h2>
-          <!-- btn-group, see: http://twitter.github.com/bootstrap/components.html#buttonGroups -->
           <div class="span12 app-toolbar btn-group">
             <input type="text" id="search" placeholder="Search by name, surname, activities.." />
             <button class="btn" id="byName">Sort by name</button>
             <button class="btn" id="byBirthday">Sort by birthday</button>
           </div>
           <div style="margin-left : -50px;" class = "charts"> 
-                <ul class="nav nav-tabs">
-                   <li id="li_amis"class="active">
-                      <a href="#" onclick="FbApp.showCharts('chartByFriendCount','li_amis'); return false;">Nombre d'amis</a>
-                  </li>
-                  <li id="li_sex"><a href="#"  onclick=" FbApp.showCharts('chartBySex','li_sex'); return false;">Sexe</a></li>
-                  <li id="li_status"><a href="#"  onclick="FbApp.showCharts('chartByRelationShip' , 'li_status'); return false;">Status</a></li>
-                </ul>
-                  <div style="width:100%; height : 300px" id ="chartBySex"></div>          <!--  Les différentes div sont destinées à l'affichages des 3 graphiques  -->  
-                  <div style="width:100%; height : 300px" id ="chartByFriendCount"></div>
-                  <div style="width:100%; height : 300px" id ="chartByRelationShip"></div>     
+            <ul class="nav nav-tabs">
+               <li id="li_amis"class="active">
+                  <a href="#" onclick="FbApp.showCharts('chartByFriendCount','li_amis'); return false;">Nombre d'amis</a>
+              </li>
+              <li id="li_sex">
+                <a href="#"  onclick=" FbApp.showCharts('chartBySex','li_sex'); return false;">Sexe</a>
+              </li>
+              <li id="li_status">
+                <a href="#"  onclick="FbApp.showCharts('chartByRelationShip' , 'li_status'); return false;">Status</a>
+              </li>
+              <li id="li_age">
+                <a href="#"  onclick="FbApp.showCharts('chartByAge' , 'li_age'); return false;">Age</a>
+              </li>
+            </ul>
+              <div style="width:100%; height : 300px" id ="chartBySex"></div>          <!--  Les différentes div sont destinées à l'affichages des 3 graphiques  -->  
+              <div style="width:100%; height : 300px" id ="chartByFriendCount"></div>
+              <div style="width:100%; height : 300px" id ="chartByRelationShip"></div>
+              <div style="width:100%; height : 300px" id ="chartByAge"></div>  
           </div>
           <div class="friend-list row"></div>
         </div>
@@ -116,6 +123,8 @@
     <script src="app/chart/ChartFriendCountModel.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/chart/ChartRelationshipModel.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/chart/ChartSexModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartAgeModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartAgeView.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/chart/ChartSexView.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/chart/ChartFriendCountView.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/chart/ChartRelationShipView.js" type="text/javascript" charset="utf-8"></script>
@@ -135,23 +144,31 @@
         });
         var myChartRelationshipModel = new FbApp.ChartRelationshipModel({
          collection : myFriends, 
+        }); 
+
+        var myChartAgeModel = new FbApp.ChartAgeModel({
+         collection : myFriends, 
         });        
 
 
         var myChartSexView = new FbApp.ChartSexView({
           model : myChartSexModel,
-          el: $('#chartBySex'),
+          nameDiv: 'chartBySex',
         });
         var myChartFriendCountView = new FbApp.ChartFriendCountView({
           model : myChartFriendCountModel,
-          el: $('#chartByFriendCount')
+          nameDiv: 'chartByFriendCount',
         });
         var myChartRelationshipView = new FbApp.ChartRelationshipView({
           model : myChartRelationshipModel,
-          el: $('#chartByRelationShip')
+          nameDiv: 'chartByRelationShip',
         });
 
-        var myCharts = new FbApp.ChartView({});
+        var myChartAgeView = new FbApp.ChartAgeView({
+          model : myChartAgeModel,
+          nameDiv: 'chartByAge',
+        });
+
         var myApp = new FbApp.AppView({
           collection : myFriends,
           el: $('.app')[0],

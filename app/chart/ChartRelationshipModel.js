@@ -1,9 +1,5 @@
 FbApp.ChartRelationshipModel = FbApp.ChartModel.extend({
 
-	/*initialize: function(){
-        this.collection.on('reset', this.render, this);    
-  	},*/
-
 	processData : function(collection){
 		var arrayByRelationChip = []; 
 		collection.forEach(function(friend){
@@ -21,22 +17,8 @@ FbApp.ChartRelationshipModel = FbApp.ChartModel.extend({
 		           arrayByRelationChip.push(newTab);
 		      }
 		});
-		this.arr = arrayByRelationChip;
-		this.set('charData' ,this.arr);
+		this.arr = arrayByRelationChip
+		this.set('charData' ,this);
 	},
-
-	 setChartByRelationShip : function(arrayByRelationChip){
-      var plot3 = jQuery.jqplot ('chartByRelationShip', [arrayByRelationChip], { 
-        seriesDefaults: {
-          renderer: jQuery.jqplot.PieRenderer, 
-          rendererOptions: {
-            showDataLabels: true
-          }
-        }, 
-        legend: { show:true, location: 'e' }
-   });
-  },
-
-  
 
 });

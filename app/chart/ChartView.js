@@ -3,12 +3,21 @@ FbApp.ChartView = Backbone.View.extend({
 
   },
   
-  initialize: function(){
-      this.model.on('change : charData' , this.render,this);
+  initialize: function(options){
+  		_.extend(this,options || {});
+  	   this.model.on('change : charData' , this.render , this);
   },
 
   render : function(tab){
-    console.log(tab);
+    	var plot2 = jQuery.jqplot (this.nameDiv, [tab.arr], { 
+        seriesDefaults: {
+          renderer: jQuery.jqplot.PieRenderer, 
+          rendererOptions: {
+            showDataLabels: true
+          }
+        }, 
+        legend: { show:true, location: 'e' }
+	 });
   }
 
 });

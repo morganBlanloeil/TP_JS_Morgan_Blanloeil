@@ -17,20 +17,7 @@ FbApp.ChartSexModel = FbApp.ChartModel.extend({
 		           arrayForChartBySex.push(newTab);
 		      }
 		});
-		this.arr = arrayForChartBySex;
-		this.set('charData' ,this.arr);
+		this.arr = arrayForChartBySex
+		this.set('charData' ,this);
 	},
-
-	/*setChartBySex: function(arrayForChartBySex){   //On va afficher le graphique en fonction du Json passé en paramètre
-	 var plot1 = jQuery.jqplot ('chartBySex', [arrayForChartBySex], { 
-        seriesDefaults: {
-          title:'Pourcentage par sexe',  //Le titre du graphe
-          renderer: jQuery.jqplot.PieRenderer,  //Le type de graphe
-          rendererOptions: {
-            showDataLabels: true
-          }
-        }, 
-        legend: { show:true, location: 'e' }
-	 });
-  },*/
 });
