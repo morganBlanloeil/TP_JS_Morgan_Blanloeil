@@ -18,7 +18,7 @@ FbApp.ChartRelationshipModel = FbApp.ChartModel.extend({
 		      }
 		});
 		this.arr = arrayByRelationChip
-		this.set('charData' ,this);
+		this.trigger('charData' ,this);
 	},
 
 });

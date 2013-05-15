@@ -1,15 +1,12 @@
 FbApp.ChartView = Backbone.View.extend({
-	events:{
-
-  },
-  
   /*
     On récupère les options
     on va écouter sur le 'set ' si il est déclenché on lance la méthode render
   */
+
   initialize: function(options){
-  		_.extend(this,options || {});
-  	   this.model.on('change : charData' , this.render , this);
+      _.extend(this,options || {});
+       this.model.on('charData' , this.render , this);
   },
 
   /**
@@ -27,6 +24,5 @@ FbApp.ChartView = Backbone.View.extend({
         legend: { show:true, location: 'e' }
 	 });
   }
-
 });
 

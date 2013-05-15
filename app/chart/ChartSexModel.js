@@ -1,5 +1,6 @@
 FbApp.ChartSexModel = FbApp.ChartModel.extend({
 
+	
  	processData : function(collection){
 		var arrayForChartBySex = []; 
 		collection.forEach(function(friend){
@@ -18,6 +19,6 @@ FbApp.ChartSexModel = FbApp.ChartModel.extend({
 		      }
 		});
 		this.arr = arrayForChartBySex
-		this.set('charData' ,this);
+		this.trigger('charData' ,this);
 	},
 });

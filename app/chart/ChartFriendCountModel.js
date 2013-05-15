@@ -24,6 +24,6 @@ FbApp.ChartFriendCountModel = FbApp.ChartModel.extend({
   		});  
 
 		this.arr = arrayForChartByFriendCount
-		this.set('charData' ,this);
+		this.trigger('charData' ,this);
 	},
 });

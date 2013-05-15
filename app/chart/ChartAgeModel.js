@@ -36,6 +36,7 @@ FbApp.ChartAgeModel = FbApp.ChartModel.extend({
 
         arrayForAge.push(['Inconnu',nbInconnu]);  // On ajoute le nombre de null aux datas
 		this.arr = arrayForAge
-		this.set('charData' ,this); //On signale qu'on a changé les données
+		this.trigger('charData' ,this); //On signale qu'on a changé les données
+	}
 	
 });
