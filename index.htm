@@ -109,27 +109,47 @@
     </script>
     <script src="app/Friend.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/Friends.js" type="text/javascript" charset="utf-8"></script>
-    <script src="app/Charts.js" type="text/javascript" charset="utf-8"></script>
-    <script src="app/ChartsView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartView.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/FriendView.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/AppView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartFriendCountModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartRelationshipModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartSexModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartSexView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartFriendCountView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/chart/ChartRelationShipView.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
       FbApp.init = function(){
+
+        //Collection
         var myFriends = new FbApp.Friends();
-        var myCharts = new FbApp.ChartsView({
-              collection:myFriends,
-          });
+
+        //Model par graphe
+        var myChartSex = new FbApp.ChartSexModel();
+        var myChartFriendCount = new FbApp.ChartFriendCountModel();
+        var myChartRelationship = new FbApp.ChartRelationshipModel();
+
+        //Tableau des models des graphes
+        var tab = [myChartSex,myChartRelationship,myChartFriendCount];
+
+        var myCharts = new FbApp.ChartView({
+          collection : myFriends,
+          model : tab,
+        });
         var myApp = new FbApp.AppView({
           collection : myFriends,
           el: $('.app')[0],
         });
-
-        console.log(myCharts);
-        console.log(myApp);
         myFriends.reset(getFriends());
       };
+      
       FbApp.init();
     </script>
+
+
+
+    <!-- Gestion des onglets -->
     <script type="text/javascript">
       $('#chartBySex').hide();
       $('#chartByRelationShip').hide();
@@ -137,10 +157,8 @@
       FbApp.LiActive = '#li_amis';
 
       FbApp.showCharts = function(chart,id_li){
-        console.log(chart);
           var tmpDiv = "#" + chart;
           var tmpLi =  "#" + id_li;
-          console.log(tmpDiv);
           if ($(FbApp.ChartsShow).is(':visible')) {
                   $(FbApp.ChartsShow).hide('slow',function(){});
           }

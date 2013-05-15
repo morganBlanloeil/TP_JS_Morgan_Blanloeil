@@ -14,38 +14,47 @@ FbApp.AppView = Backbone.View.extend({
     this.collection.search(e.currentTarget.value);   // Méthode qui va chercher les élements en fonctions des paramètres de recherche
   },
 
-  sortByName: function(){
+/*  sortByName: function(){
     this.collection.sortByName();   //Fonction de tri par nom
   },
 
   sortByBirthday: function(){
     this.collection.sortByBirthday();  //Fonction de tri par anniversaire
+  },*/
+
+   sortByName: function(){
+    this.collection.setSortBy('name');   //Fonction de tri par nom
   },
 
+  sortByBirthday: function(){
+    this.collection.setSortBy('birthday'); //Fonction de tri par anniversaire
+  },
+
+
   render: function(collection){
-    this.$friendList.empty();   //On vide la div pour ne pas accumuler les affichages
-    var arrayForChartBySex = new Array();  // Tableau pour le graphe
+    this.$friendList.empty(); 
+      //On vide la div pour ne pas accumuler les affichages
+    /*var arrayForChartBySex = new Array();  // Tableau pour le graphe
     var tabIndexFriendCount = [100,200,300,400,500];
     var arrayForChartByFriendCount = new Array();
     var arrayForChartByRelationShip = new Array();
-    this.initializeTab(arrayForChartByFriendCount,tabIndexFriendCount);
+    this.initializeTab(arrayForChartByFriendCount,tabIndexFriendCount);*/
     var $container = $('<div/>');
     collection.forEach(function(friend){  //Pour chaque item de la collection
       var view = new FbApp.FriendView({
         model: friend
       });
       $container.append(view.render().$el);  // On ajoute la vue renvoyé par le model a notre contenair principal
-      this.putInArrayForChart(arrayForChartBySex,friend['attributes']['sex']);  //On incrémente nos tableaux pour nos graphiques
+      /*this.putInArrayForChart(arrayForChartBySex,friend['attributes']['sex']);  //On incrémente nos tableaux pour nos graphiques
       this.putInArrayForChartFriendCount(arrayForChartByFriendCount,friend['attributes']['friend_count']);
-      this.putInArrayForChart(arrayForChartByRelationShip,friend['attributes']['relationship_status']);
+      this.putInArrayForChart(arrayForChartByRelationShip,friend['attributes']['relationship_status'])*/
       
     }, this);
     this.$friendList.append($container);  //On affiche le contenaire
-
-    var chartView = new FbApp.ChartsView();  //On créer une vue pour les graphes
+    /*var chartView = new FbApp.ChartsView();  //On créer une vue pour les graphes
     chartView.setChartBySex(arrayForChartBySex); //On affiche les graphes
     chartView.setChartByFriendCount(arrayForChartByFriendCount);
-    chartView.setChartByRelationShip(arrayForChartByRelationShip);
+    chartView.setChartByRelationShip(arrayForChartByRelationShip);*/
   },
 
   putInArrayForChart: function(tab,type){     
