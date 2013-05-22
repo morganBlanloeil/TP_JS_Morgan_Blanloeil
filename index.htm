@@ -58,9 +58,18 @@
         <div class="span12">
           <h2 class="app-heading">Fb Friends App</h2>
           <div class="span12 app-toolbar btn-group">
-            <input type="text" id="search" placeholder="Search by name, surname, activities.." />
-            <button class="btn" id="byName">Sort by name</button>
-            <button class="btn" id="byBirthday">Sort by birthday</button>
+            <ul class="inline">
+              <li>
+                <input type="text" id="search" placeholder="Search by name, surname, activities.." />
+              </li>
+              <li>
+                <input type="radio" checked name="search" id="byName" value="name">
+                <label for="byName">Name </label>
+              </li>
+              <li>
+                <input type="radio" id="byBirthday" name="search" value="name">
+                <label for="byBirthday">Birthday </label>
+              </li>
           </div>
           <div style="margin-left : -50px;" class = "charts"> 
             <ul class="nav nav-tabs">
@@ -179,7 +188,8 @@
           collection : myFriends,
           el: $('.app')[0],
         });
-        myFriends.reset(getFriends());
+        myFriends.reset(getFriends()); //On récupère la collection
+        myFriends.sortCollection(); // On la trie par défault
       };
       
       FbApp.init();

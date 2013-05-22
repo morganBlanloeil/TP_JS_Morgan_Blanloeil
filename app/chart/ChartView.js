@@ -14,7 +14,6 @@ FbApp.ChartView = Backbone.View.extend({
     jqPlot se charge de l'affichage
   */
   render : function(tab){
-    console.log(tab.arr);
     $(this.el).highcharts({
             chart: {
                 plotBackgroundColor: null,
@@ -47,16 +46,6 @@ FbApp.ChartView = Backbone.View.extend({
                 data : tab.arr,
             }]
         });
-    	/*var plot2 = jQuery.jqplot (this.nameDiv, [tab.arr], { 
-        seriesDefaults: {
-          renderer: jQuery.jqplot.PieRenderer, 
-          rendererOptions: {
-            showDataLabels: true
-          }
-        }, 
-        legend: { show:true, location: 'e' }
-	 });*/
-  
   },
 });
 

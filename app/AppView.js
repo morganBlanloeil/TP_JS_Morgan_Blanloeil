@@ -15,21 +15,13 @@ FbApp.AppView = Backbone.View.extend({
   },
 
   sortByName: function(){
-    this.collection.sortByName();   //Fonction de tri par nom
-  },
-
-  sortByBirthday: function(){
-    this.collection.sortByBirthday();  //Fonction de tri par anniversaire
-  },
-
-   /*sortByName: function(){
     this.collection.setSortBy('name');   //Fonction de tri par nom
   },
 
   sortByBirthday: function(){
-    this.collection.setSortBy('birthday'); //Fonction de tri par anniversaire
-  },*/
 
+    this.collection.setSortBy('birthday');  //Fonction de tri par anniversaire
+  },
 
   render: function(collection){
     this.$friendList.empty(); 

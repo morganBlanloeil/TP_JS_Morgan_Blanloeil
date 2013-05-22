@@ -1,59 +1,68 @@
 FbApp.Friends = Backbone.Collection.extend({
-  model: FbApp.Friend, //On associe un model a notre collection
-  search: function(searchToken){
-    searchToken = searchToken.toLowerCase();
+  model: FbApp.Friend,
 
-    var sortedArray = this.filter(function(friendModel){
-      return _.find(['birthday_date', 'name' /*... etc... */], function(attr){ //On recherche dans notre collection les élements correspondant a la chaine de caractère passé en paramètre
-        return (friendModel.get(attr) || '').toLowerCase().indexOf(searchToken) !== -1;
+  initialize: function(){
+    this.sortField ='name';  //Par défault la collection se trie par nom
+    this.filteredColl = this;  
+    this.filteredCollObject = this
+    this.searchToken ="";
+  },
+
+  search: function(searchToken){
+    this.searchToken = searchToken; //On récupère la contenu de la recherche
+    searchToken = searchToken.toLowerCase();
+    var friends = this._flatten(this.toJSON());
+    this.filteredColl = _(this.filter(function(friend){
+      return _.find(_.keys(friend.attributes), function(attr){
+        if(!_.isString(friend.attributes[attr])){return false;}
+        return (friend.attributes[attr] ||'').toLowerCase().indexOf(searchToken) !== -1;
       }) !== undefined;
+    }, this));
+    this.filteredCollObject = this.filteredColl;  //On récupère l'objet
+    this.getSortedCollection();
+    this.trigger('reset', this.filteredColl); //On indique que la collection a changé
+  },
+
+   _flatten: _.memoize(function(root){
+    var defaultValue = '';
+
+    function valueSelector(value){
+      return _.isString(value) && value.length > 0;
+    }
+
+    return root.map(function(friend){
+      return _.flatten(friend, valueSelector, defaultValue);
     }, this);
 
-    this.trigger('reset', sortedArray); // Ensuite on emet un signal pour que l'appView mette à jour l'application
+  }),
+
+  setSortBy: function(field){
+    this.sortField = field;
+    this.getSortedCollection();
+    this.trigger('reset', this.filteredColl);
   },
 
-  sortByName: function(){
-    var sortedArray = this.sortBy(function(friend){ //On trie la collection par le nom
-      return friend.get('name');
-    });
-
-    this.trigger('reset', sortedArray); //On envoie à la vue
+  sortCollection:function(){
+      this.getSortedCollection();
+      this.trigger('reset', this.filteredColl);
   },
 
-  sortByBirthday: function(){ //On trie la collection par anniversaire
-    var sortedArray = this.sortBy(function(friend){
-      return Date.parse(friend.get('birthday_date'));
-    });
-
-    this.trigger('reset', sortedArray); //On envoie à la vue
+  _visitor:{
+    name:function(friendModel){return friendModel.get('name');},  //Si on trie par nom  on renvoie le nom de l'ami
+    birthday:function(friendModel){  //Si c'est par date
+      var reg= new RegExp("^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$","g");   //L'expression régulière permettant de vérifier la date
+      var tmpDate = friendModel.get('birthday_date');  //On récupère la date de l'ami
+      if(! reg.test(tmpDate)){ //Si elle ne correspond pas à l'expression régulière on donne une valeur par défault
+        tmpDate = "01/01/3000";
+      }
+      var date =(tmpDate).split("/");
+      return [date[2],date[1],date[0]];  //On retourne la date dans le format AAAA/MM/JJ
+    },
   },
-});FbApp.Friends = Backbone.Collection.extend({
-  model: FbApp.Friend, //On associe un model a notre collection
-  search: function(searchToken){
-    searchToken = searchToken.toLowerCase();
+  
+  getSortedCollection: function(){
 
-    var sortedArray = this.filter(function(friendModel){
-      return _.find(['birthday_date', 'name' /*... etc... */], function(attr){ //On recherche dans notre collection les élements correspondant a la chaine de caractère passé en paramètre
-        return (friendModel.get(attr) || '').toLowerCase().indexOf(searchToken) !== -1;
-      }) !== undefined;
-    }, this);
-
-    this.trigger('reset', sortedArray); // Ensuite on emet un signal pour que l'appView mette à jour l'application
+    this.filteredColl =  this.filteredCollObject.sortBy(this._visitor[this.sortField]);  //On trie la collection en cours
+ 
   },
-
-  sortByName: function(){
-    var sortedArray = this.sortBy(function(friend){ //On trie la collection par le nom
-      return friend.get('name');
-    });
-
-    this.trigger('reset', sortedArray); //On envoie à la vue
-  },
-
-  sortByBirthday: function(){ //On trie la collection par anniversaire
-    var sortedArray = this.sortBy(function(friend){
-      return Date.parse(friend.get('birthday_date'));
-    });
-
-    this.trigger('reset', sortedArray); //On envoie à la vue
-  },
-});
+ });
